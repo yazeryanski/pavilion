@@ -1,23 +1,28 @@
 import "./App.css";
-import "./font-awesome-pro.css";
+import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Profile from "./components/Profile/Profile";
+import Dialogs from "./components/Dialogs/Dialogs";
+import { BrowserRouter, Route } from "react-router-dom";
 
-function App() {
+function App(props) {
     return (
-        <div className="Wrapper">
-            <header>
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.g4f-records.com%2Fen%2Fqui-sommes-nous%2Flogo-facebook-2%2F&psig=AOvVaw3BNSIfozgr06zMGLFNR2UT&ust=1616004292154000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCE1qSzte8CFQAAAAAdAAAAABAK" />
-            </header>
+        <BrowserRouter>
+            <div className="wrapper">
+                <Header />
 
-            <nav className="sidebar">
-                <ul className="menuList">
-                    <li className="menuItem">
-                        <i class="fal fa-user-circle menuItem-icon"></i>
+                <div className="container wrapper-container">
+                    <Sidebar />
+                    <article className="cont">
+                        <Route path="/profile" render={ () => <Profile state={props.state.profilePage}/>} />
+                        <Route path="/dialogs" render={ () => <Dialogs state={props.state.dialogPage}/>} />
+                    </article>
+                </div>
 
-						<a href="#s">My Profile</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+                
+            </div>
+
+        </BrowserRouter>
     );
 }
 

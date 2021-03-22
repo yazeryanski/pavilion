@@ -1,0 +1,38 @@
+.message {
+    width: 70%;
+    padding: 25px 33px 11px 33px;
+    background-color: #F4F4F4;
+    border-radius: 18px;
+    border: 1px solid transparent;
+    margin-bottom: 22px;
+    align-self: flex-start;
+}
+
+.messageText {
+    color: #000;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.messageDate {
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #868686;
+}
+
+.message.me {
+    background-color: #3161EA;
+    align-self: flex-end;
+}
+
+.message.me .messageText {
+    color: #fff;
+}
+
+.message.me .messageDate {
+    color: #8AA8FD;
+}
+

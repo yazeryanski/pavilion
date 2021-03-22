@@ -1,0 +1,18 @@
+.newPost {
+    margin-bottom: 75px;
+}
+.newPost textarea {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 18px;
+    padding: 16px 25px;
+    transition: .3s all ease-in;
+    margin-bottom: 10px;
+    min-height: 100px;
+}
+
+.newPost textarea:focus {
+    outline: none;
+    border-color: #3161EA;
+    background-color: #fff;
+}

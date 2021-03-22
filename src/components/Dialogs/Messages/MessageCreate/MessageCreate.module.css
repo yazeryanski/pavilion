@@ -1,0 +1,46 @@
+.newMessage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textarea {
+    width: 90%;
+    height: 100%;
+    border-radius: 18px;
+    background-color: #F4F4F4;
+    transition: .5s ease-in all;
+    border-color: none;
+    outline: none;
+    padding: 21px 25px;
+}
+
+.textarea:focus {
+    border-color: #3161EA;
+    background-color: #fff;
+}
+
+
+.sendMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+    width: 9%;
+    margin-left: 1%;
+    border-radius: 18px;
+    background-color: #3161EA;
+    transition: .3s ease-out all;
+}
+
+.sendMessage:hover {
+    background-color: rgb(68, 113, 235);
+}
+
+.sendMessage i {
+    font-size: 20px;
+}

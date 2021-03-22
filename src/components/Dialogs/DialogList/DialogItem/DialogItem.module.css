@@ -1,0 +1,53 @@
+.dialogItem {
+    width: 100%;
+}
+
+.dialog {
+    color: #000;
+    text-decoration: none;
+    padding: 12px 12px 12px 70px;
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    position: relative;
+    transition: .1s all ease-in;
+}
+
+.dialog::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-left: 14px solid transparent;
+    border-bottom: 7px solid transparent;
+    transition: .1s all ease-in;
+
+    position: absolute;
+    right: -14px;
+}
+
+.dialog::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #C4C4C4;
+    display: inline-block;
+    margin-right: 8px;
+    transition: .1s all ease-in;
+}
+
+.dialog.active {
+    background-color: #3161EA;
+    color: #fff;
+}
+
+.dialog.active::before {
+    background-color: #FFC635;
+    color: #fff;
+}
+
+.dialog.active::after {
+    border-left: 14px solid #3161EA;
+}
