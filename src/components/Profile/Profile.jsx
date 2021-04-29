@@ -6,9 +6,12 @@ export default function Profile(props) {
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-
             <div className={s['profileContent']} >
-                <MyPosts posts={props.state.posts}/>
+                <MyPosts 
+                    newPostText={props.state.newPostText}
+                    posts={props.state.posts}
+                    dispatch={props.dispatch}
+                />
             </div>
         </div>
     );

@@ -15,7 +15,7 @@ export default function DialogItem(props) {
             </div>
 
             <div className={s.newMessageSection}>
-                <MessageCreate />
+                <MessageCreate dispatch={props.dispatch} newMessageText={props.newMessageText}/>
             </div>
         </div>
     );

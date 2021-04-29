@@ -4,30 +4,43 @@ import Post from "../../Post/Post";
 import s from "./MyPosts.module.css";
 
 export default function MyPosts(props) {
-
     let newPostText = React.createRef();
 
-    let addNewPost = () => {
-        let text = newPostText.current.value;
-        alert(text);
-    }
+    let addNewPost = (e) => {
+        e.preventDefault();
+        props.dispatch({type: 'ADD-POST'});
+        props.dispatch({type:'UPDATE-NEW-POST-TEXT', val: '' });
+    };
 
-    let postsRender = props.posts.map(
-        p => <Post text={p.text} />
-    )
+    let updateTextarea = () => {
+        let text = newPostText.current.value;
+        props.dispatch({type:'UPDATE-NEW-POST-TEXT', val: text });
+    };
+
+    let postsRender = props.posts.map((p) => (
+        <Post text={p.text} date={p.date} />
+    ));
 
     return (
         <div className={s.myPosts}>
             <h2 className="sectionTitle">New Post</h2>
             <div className={s.newPost}>
-                <textarea onBlur={ addNewPost } ref={newPostText} placeholder="What's new ?" />
-                <Button link="#" title="Post" type="action"></Button>
+                <textarea
+                    ref={newPostText}
+                    placeholder="What's new ?"
+                    value={props.newPostText}
+                    onChange={updateTextarea}
+                />
+                <Button
+                    onClick={addNewPost}
+                    link="#"
+                    title="Post"
+                    type="action"
+                ></Button>
             </div>
 
             <h2 className="sectionTitle">My Posts</h2>
-            <div className={s.MyPosts}>
-                { postsRender }
-            </div>
+            <div className={s.MyPosts}>{postsRender}</div>
         </div>
     );
 }

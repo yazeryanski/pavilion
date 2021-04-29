@@ -12,7 +12,7 @@ export default function Post(props) {
                 />
                 <h4>John Smith</h4>
 
-                <span className={s.postDate}>19.03.2020</span>
+                <span className={s.postDate}>{props.date}</span>
             </div>
 
             <p className={s.postText}>{props.text}</p>
