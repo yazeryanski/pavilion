@@ -1,0 +1,27 @@
+.usersPage {
+    padding: 35px 33px;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    color: #4D4D4D;
+    margin-bottom: 27px;
+}
+
+.userColumn {
+    padding: 0 5px;
+}
+
+.usersList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 550px;
+}
+
+
+.userColumn {
+    margin-bottom: 10px;
+    text-decoration: none;
+}

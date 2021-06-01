@@ -10,3 +10,18 @@
 .header img {
     width: 160px;
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login a {
+    color: rgb(134, 134, 134);
+    text-decoration: none;
+}
+
+.login a:hover {
+    color: #3161EA;
+}

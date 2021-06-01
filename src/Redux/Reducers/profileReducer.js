@@ -1,7 +1,10 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_PROFILE = "SET_PROFILE"; 
 
 const initialState = {
+    profile: null,
+
     posts: [
         {
             id: "0",
@@ -25,19 +28,35 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
-            state.posts.push({
-                id: state.posts.length, //AutoIncrement ID
-                text: state.newPostText,
-                date: new Date().toLocaleString(),
-            });
-            return state;
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.val;
-            return state;
+        case ADD_POST: {
+            return {
+                ...state,
+                posts: [
+                    ...state.posts,
+                    {
+                        id: state.posts.length, //AutoIncrement ID
+                        text: state.newPostText,
+                        date: new Date().toLocaleString(),
+                    },
+                ],
+            };
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            return { ...state, newPostText: action.val};
+        }
+
+        case SET_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state;
     }
 };
 
 export default profileReducer;
+
+export const setProfile = (profile) => {
+    return {type: SET_PROFILE, profile}
+}

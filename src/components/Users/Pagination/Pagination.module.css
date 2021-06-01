@@ -1,0 +1,38 @@
+.pagination {
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.pagination ul {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+}
+
+.pagination ul li {
+    margin-left: 5px;
+}
+
+.pagination ul li:first-child {
+    margin-left: 0;
+}
+
+.pagination ul li a{
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #3161EA;
+    border-radius: 3px;
+    display: inline-block;
+    transition: ease-in-out .3s all;
+}
+
+.disabled a {
+    background-color: #b2b5be !important;
+}
+
+.active a {
+    background-color: #2348ad !important;
+    transform: scale(1.2);
+}

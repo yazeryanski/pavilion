@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import s from './Sidebar.module.css'
+import { NavLink } from "react-router-dom";
+import s from "./Sidebar.module.css";
 
 export default function Sidebar() {
     return (
@@ -16,6 +16,13 @@ export default function Sidebar() {
                     <NavLink activeClassName={s.active} to="/dialogs">
                         <i className="fal fa-comment-alt-smile"></i>
                         <span>Messages</span>
+                    </NavLink>
+                </li>
+
+                <li className={s.menuItem}>
+                    <NavLink activeClassName={s.active} to="/users">
+                        <i className="fal fa-users"></i>
+                        <span>Users</span>
                     </NavLink>
                 </li>
 

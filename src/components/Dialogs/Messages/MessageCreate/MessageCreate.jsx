@@ -6,16 +6,12 @@ export default function MessageCreate(props) {
 
     function updateText() {
         let text = textBox.current.value;
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', val: text });
+        props.updateText(text);
     }
 
     function addMessage(e) {
         e.preventDefault();
-
-        props.dispatch({
-            type: 'ADD-MESSAGE'
-        })
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', val: '' });
+        props.addMessage();
     }
 
     function enterPressed(e) {  

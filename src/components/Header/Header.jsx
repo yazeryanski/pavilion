@@ -1,13 +1,19 @@
 import s from './Header.module.css'
+import logo from '../../assets/images/logo.png'
+import { NavLink } from 'react-router-dom'
 
-export default function Header() {
+export default function Header(props) {
     return (
         <header className={s.header}>
-            <div className="container">
+            <div className={'container ' + s.container}>
                 <img
                     alt="logo"
-                    src="https://www.g4f-records.com/wp-content/uploads/2016/09/logo-facebook-1024x385.png"
+                    src={logo}
                 />
+
+                <nav className={s.login}>
+                    {props.isLogined ? props.username: <NavLink to="/login">Login</NavLink>}
+                </nav>
             </div>
         </header>
     );

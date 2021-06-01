@@ -1,40 +1,38 @@
 import "./App.css";
-import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route } from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 function App(props) {
     return (
         <BrowserRouter>
             <div className="wrapper">
-                <Header />
+                <HeaderContainer />
 
                 <div className="container wrapper-container">
                     <Sidebar />
                     <article className="cont">
                         <Route
-                            path="/profile"
+                            path="/profile/:userId?"
                             render={function () {
-                                return (
-                                    <Profile
-                                        state={props.state.profilePage}
-                                        dispatch={props.dispatch}
-                                    />
-                                );
+                                return <ProfileContainer />;
                             }}
                         />
 
                         <Route
                             path="/dialogs"
-                            render={ function() {
-                                return(
-                                    <Dialogs 
-                                        state={props.state.dialogsPage}
-                                        dispatch={props.dispatch}
-                                    />
-                                )
+                            render={function () {
+                                return <DialogsContainer />;
+                            }}
+                        />
+
+                        <Route
+                            path="/users"
+                            render={function () {
+                                return <UsersContainer />;
                             }}
                         />
                     </article>

@@ -1,0 +1,42 @@
+[
+    {
+        id: 1,
+        name: "Suren Sahakyan",
+        image: "https://i.redd.it/ko6mhd064q161.png",
+        status: "I'm a junior react.js developer",
+        followed: false,
+        location: { city: "Yerevan", country: "Armenia" },
+    },
+    {
+        id: 2,
+        name: "Babken Tunyan",
+        image: "https://pbs.twimg.com/media/Ed8OSa-WkAEjs8M.jpg",
+        status: "I'm a junior react.js developer",
+        followed: true,
+        location: { city: "Gyumri", country: "Armenia" },
+    },
+    {
+        id: 3,
+        name: "Gayane Sahakyan",
+        image: "https://i.redd.it/1opazkkfhmg21.jpg",
+        status: "I'm a junior react.js developer",
+        followed: false,
+        location: { city: "San Francisco", country: "USA" },
+    },
+    {
+        id: 4,
+        name: "Satenik Galstyan",
+        image: "https://i.imgur.com/3XTXr9u.jpg",
+        status: "I'm a junior react.js developer",
+        followed: true,
+        location: { city: "RIO", country: "Brazil" },
+    },
+    {
+        id: 5,
+        name: "Satenik Galstyan",
+        image: "https://i.imgur.com/3XTXr9u.jpg",
+        status: "I'm a junior react.js developer",
+        followed: true,
+        location: { city: "RIO", country: "Brazil" },
+    },
+]

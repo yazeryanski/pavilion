@@ -37,16 +37,23 @@ const initialState = {
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            state.messages.push({
-                id: state.messages.length, //AutoIncrement ID
-                text: state.newMessageText,
-                date: new Date().toLocaleString(),
-                who: 'me'
-            });
-            return state;
+            return {
+                ...state,
+                messages: [
+                    ...state.messages,
+                    {
+                        id: state.messages.length, //AutoIncrement ID
+                        text: state.newMessageText,
+                        date: new Date().toLocaleString(),
+                        who: "me",
+                    },
+                ],
+            };
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.val;
-            return state;
+            return {
+                ...state,
+                newMessageText: action.val,
+            }
         default:
             return state;
     }

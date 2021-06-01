@@ -8,17 +8,16 @@ export default function MyPosts(props) {
 
     let addNewPost = (e) => {
         e.preventDefault();
-        props.dispatch({type: 'ADD-POST'});
-        props.dispatch({type:'UPDATE-NEW-POST-TEXT', val: '' });
+        props.addNewPost();
     };
 
     let updateTextarea = () => {
         let text = newPostText.current.value;
-        props.dispatch({type:'UPDATE-NEW-POST-TEXT', val: text });
+        props.updateTextarea(text);
     };
 
     let postsRender = props.posts.map((p) => (
-        <Post text={p.text} date={p.date} />
+        <Post text={p.text} date={p.date} key={p.id}/>
     ));
 
     return (
