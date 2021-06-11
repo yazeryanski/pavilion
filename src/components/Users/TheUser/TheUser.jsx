@@ -28,13 +28,12 @@ export class TheUser extends React.Component {
                         }
                         }
                         className={
-                            (this.props.info.followed
-                                ? s.btnUnfollow
-                                : s.btnFollow) +
-                            " " +
-                            s.btn
+                            (this.props.info.followed ? s.btnUnfollow : s.btnFollow) + " " + s.btn
                         }
+
+                        disabled={this.props.flwDisabled}
                     >
+                        {this.props.flwDisabled}
                         {this.props.info.followed ? "X Unfollow" : "+ Follow"}
                     </button>
                 </div>

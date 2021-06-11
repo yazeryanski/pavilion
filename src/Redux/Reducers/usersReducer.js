@@ -3,6 +3,7 @@ const SET_USERS = "SET_USERS";
 const PAGE_CLICK = "PAGE_CLICK";
 const SET_ALL_USERS_COUNT = "SET_ALL_USERS_COUNT";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const ADD_TO_FOLLOWING_PROCESS = "ADD_TO_FOLLOWING_PROCESS";
 
 const initialState = {
     users: [],
@@ -10,6 +11,7 @@ const initialState = {
     currentPage: 1,
     usersPerPage: 10,
     isFetching: false,
+    followingProgress: []
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -44,6 +46,13 @@ const dialogsReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.value
             }
+        case ADD_TO_FOLLOWING_PROCESS:
+            return {
+                ...state,
+                followingProgress: action.isFetching
+                ? [...state.followingProgress, action.userId]
+                : [state.followingProgress.filter( id => id !== action.userId)]
+            }
         default:
             return state;
     }
@@ -52,22 +61,27 @@ const dialogsReducer = (state = initialState, action) => {
 export default dialogsReducer;
 
 // Action Creators
-export const toggleFollowAC = (userId) => {
+export const toggleFollow = (userId) => {
     return { type: TOGGLE_FOLLOW, userId };
 };
 
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
     return { type: SET_USERS, users };
 };
 
-export const setAllUsersCountAC = (count) => {
+export const setAllUsersCount = (count) => {
     return { type: SET_ALL_USERS_COUNT, count}
 };
 
-export const pageClickAC = (page) => {
+export const pageClick = (page) => {
     return { type: PAGE_CLICK, page}
 }
 
-export const togglePreloaderAC = (value) => {
+export const togglePreloader = (value) => {
     return { type: TOGGLE_IS_FETCHING, value }
 }
+
+export const followingProgress = (isFetching, userId) => {
+    return { type: ADD_TO_FOLLOWING_PROCESS, isFetching, userId }
+}
+

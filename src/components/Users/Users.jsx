@@ -15,6 +15,7 @@ export default class Users extends React.Component {
                     key={user.id}
                 >
                     <TheUser
+                        flwDisabled={this.props.flwProgressList.some(id => id === user.id)}
                         toggleFollow={this.props.toggleFollow}
                         info={user}
                     />

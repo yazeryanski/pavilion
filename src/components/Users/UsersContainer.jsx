@@ -2,11 +2,12 @@ import React from "react";
 import Users from "./Users";
 import { connect } from "react-redux";
 import {
-    toggleFollowAC,
-    setUsersAC,
-    pageClickAC,
-    setAllUsersCountAC,
-    togglePreloaderAC,
+    toggleFollow,
+    setUsers,
+    pageClick,
+    setAllUsersCount,
+    togglePreloader,
+    followingProgress,
 } from "../../Redux/Reducers/usersReducer";
 import api from '../../api';
 
@@ -29,12 +30,20 @@ class UsersAPIContainer extends React.Component {
     };
 
     toggleFollowAPI(type = "follow", id) {
-        
+        this.props.followingProgress(true, id);
+
         if (type === "follow") {
-            api.follow(id).then(res => this.props.toggleFollow(id))
+            api.follow(id).then(res => {
+                this.props.toggleFollow(id);
+                this.props.followingProgress(false, id);
+            })
         } else if (type === 'unfollow') {
-            api.unfollow(id).then( res => this.props.toggleFollow(id) );
+            api.unfollow(id).then(res => {
+                this.props.toggleFollow(id);
+                this.props.followingProgress(false, id);
+            });
         }
+        
     }
 
     render() {
@@ -45,6 +54,7 @@ class UsersAPIContainer extends React.Component {
                 usersPerPage={this.props.usersPerPage}
                 currentPage={this.props.currentPage}
                 isFetching={this.props.isFetching}
+                flwProgressList={this.props.flwProgressList}
                 pageClick={this.pageChanged}
                 toggleFollow={this.toggleFollowAPI.bind(this)}
             />
@@ -64,32 +74,20 @@ let mapStateToProps = (state) => {
         allUsersCount: state.usersPage.allUsersCount,
         usersPerPage: state.usersPage.usersPerPage,
         isFetching: state.usersPage.isFetching,
-    };
-};
-
-let mapDispatchToStore = (dispatch) => {
-    return {
-        toggleFollow(id) {
-            dispatch(toggleFollowAC(id));
-        },
-        setUsers(users) {
-            dispatch(setUsersAC(users));
-        },
-        setAllUsersCount(count) {
-            dispatch(setAllUsersCountAC(count));
-        },
-        pageClick(page) {
-            dispatch(pageClickAC(page));
-        },
-        togglePreloader(value) {
-            dispatch(togglePreloaderAC(value));
-        },
+        flwProgressList: state.usersPage.followingProgress
     };
 };
 
 const UsersContainer = connect(
     mapStateToProps,
-    mapDispatchToStore
+    {
+        toggleFollow,
+        setUsers,
+        pageClick,
+        setAllUsersCount,
+        togglePreloader,
+        followingProgress,
+    }
 )(UsersAPIContainer);
 
 export default UsersContainer;

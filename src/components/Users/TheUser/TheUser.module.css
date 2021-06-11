@@ -68,6 +68,12 @@
     box-shadow: 0 5px 15px #4462eb60;
 }
 
+.btn:disabled {
+    background-color: transparent;
+    border: #989898 1px solid;
+    color: #989898;
+}
+
 .user h3 {
     margin: 0;
     margin-top: 15px;
