@@ -3,48 +3,17 @@ import Users from "./Users";
 import { connect } from "react-redux";
 import {
     toggleFollow,
-    setUsers,
     pageClick,
-    setAllUsersCount,
-    togglePreloader,
     followingProgress,
+    getUsers,
 } from "../../Redux/Reducers/usersReducer";
-import api from '../../api';
 
 
 class UsersAPIContainer extends React.Component {
-    getUsers(page, count) {
-        console.log(this);
-        api.getUsers(count, page)
-            .then((res) => {
-                this.props.togglePreloader(false);
-                this.props.setUsers(res.items);
-                this.props.setAllUsersCount(res.totalCount);
-            })
-    }
-
     pageChanged = (p) => {
-        this.props.togglePreloader(true);
         this.props.pageClick(p);
-        this.getUsers(p, this.props.usersPerPage);
+        this.props.getUsers(p, this.props.usersPerPage);
     };
-
-    toggleFollowAPI(type = "follow", id) {
-        this.props.followingProgress(true, id);
-
-        if (type === "follow") {
-            api.follow(id).then(res => {
-                this.props.toggleFollow(id);
-                this.props.followingProgress(false, id);
-            })
-        } else if (type === 'unfollow') {
-            api.unfollow(id).then(res => {
-                this.props.toggleFollow(id);
-                this.props.followingProgress(false, id);
-            });
-        }
-        
-    }
 
     render() {
         return (
@@ -56,14 +25,13 @@ class UsersAPIContainer extends React.Component {
                 isFetching={this.props.isFetching}
                 flwProgressList={this.props.flwProgressList}
                 pageClick={this.pageChanged}
-                toggleFollow={this.toggleFollowAPI.bind(this)}
+                toggleFollow={this.props.toggleFollow}
             />
         );
     }
 
     componentDidMount() {
-        this.props.togglePreloader(true);
-        this.getUsers(this.props.currentPage, this.props.usersPerPage);
+        this.props.getUsers(this.props.currentPage, this.props.usersPerPage);
     }
 }
 
@@ -82,11 +50,9 @@ const UsersContainer = connect(
     mapStateToProps,
     {
         toggleFollow,
-        setUsers,
         pageClick,
-        setAllUsersCount,
-        togglePreloader,
         followingProgress,
+        getUsers,
     }
 )(UsersAPIContainer);
 

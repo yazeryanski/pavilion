@@ -3,7 +3,8 @@ import profileReducer from './Reducers/profileReducer';
 import sidebarReducer from './Reducers/sidebarReducer';
 import usersReducer from './Reducers/usersReducer';
 import authReducer from './Reducers/authReducer';
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunkMiddlware from 'redux-thunk';
 
 
 let reducers = combineReducers({
@@ -13,7 +14,7 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
 });
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(thunkMiddlware));
 
 
 window.store = store;

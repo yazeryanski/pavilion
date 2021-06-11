@@ -1,3 +1,5 @@
+import api from "../../api";
+
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_PROFILE = "SET_PROFILE"; 
@@ -57,6 +59,15 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const setProfile = (profile) => {
+const setProfile = (profile) => {
     return {type: SET_PROFILE, profile}
+}
+
+// Redux Thunk
+
+export const initProfile = (userId) => {
+    return (dispatch) => {
+        api.getUserDetails(userId)
+        .then( res => dispatch( setProfile(res) ) );
+    }
 }

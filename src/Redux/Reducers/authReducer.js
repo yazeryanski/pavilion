@@ -1,3 +1,5 @@
+import api from "../../api";
+
 const SET_USER = "SET_USER";
 
 const initialState = {
@@ -23,7 +25,7 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const setUser = (id, login, email) => {
+const setUser = (id, login, email) => {
     let data = {
         id,
         login,
@@ -31,4 +33,15 @@ export const setUser = (id, login, email) => {
     }
 
     return {type: SET_USER, data}
+}
+// Redux thunk
+
+export const checkLogin = () => {
+    return dispatch => {
+        api.checkLogin()
+        .then((res) => {
+            let {id, login, email} = res;
+            dispatch(setUser(id, login, email));
+        })
+    }
 }

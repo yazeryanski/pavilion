@@ -1,3 +1,5 @@
+import api from "../../api";
+
 const TOGGLE_FOLLOW = "TOGGLE_FOLLOW";
 const SET_USERS = "SET_USERS";
 const PAGE_CLICK = "PAGE_CLICK";
@@ -50,8 +52,8 @@ const dialogsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 followingProgress: action.isFetching
-                ? [...state.followingProgress, action.userId]
-                : [state.followingProgress.filter( id => id !== action.userId)]
+                    ? [...state.followingProgress, action.userId]
+                    : [state.followingProgress.filter(id => id !== action.userId)]
             }
         default:
             return state;
@@ -61,7 +63,7 @@ const dialogsReducer = (state = initialState, action) => {
 export default dialogsReducer;
 
 // Action Creators
-export const toggleFollow = (userId) => {
+const toggleFollowAC = (userId) => {
     return { type: TOGGLE_FOLLOW, userId };
 };
 
@@ -70,11 +72,11 @@ export const setUsers = (users) => {
 };
 
 export const setAllUsersCount = (count) => {
-    return { type: SET_ALL_USERS_COUNT, count}
+    return { type: SET_ALL_USERS_COUNT, count }
 };
 
 export const pageClick = (page) => {
-    return { type: PAGE_CLICK, page}
+    return { type: PAGE_CLICK, page }
 }
 
 export const togglePreloader = (value) => {
@@ -85,3 +87,34 @@ export const followingProgress = (isFetching, userId) => {
     return { type: ADD_TO_FOLLOWING_PROCESS, isFetching, userId }
 }
 
+// Redux Thunk
+export const getUsers = (page, count) => {
+    return dispatch => {
+        dispatch(togglePreloader(true));
+
+        api.getUsers(count, page)
+            .then((res) => {
+                dispatch(togglePreloader(false));
+                dispatch(setUsers(res.items));
+                dispatch(setAllUsersCount(res.totalCount));
+            })
+    }
+}
+
+export const toggleFollow = (type, id) => {
+    return (dispatch) => {
+        dispatch(followingProgress(true, id));
+
+        if (type === "follow") {
+            api.follow(id).then(res => {
+                dispatch(toggleFollowAC(id));
+                dispatch(followingProgress(false, id));
+            })
+        } else if (type === 'unfollow') {
+            api.unfollow(id).then(res => {
+                dispatch(toggleFollowAC(id));
+                dispatch(followingProgress(false, id));
+            });
+        }
+    }
+}

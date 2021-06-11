@@ -1,9 +1,8 @@
 import React from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { setProfile } from "../../Redux/Reducers/profileReducer";
+import { initProfile } from "../../Redux/Reducers/profileReducer";
 import { withRouter } from "react-router";
-import api from "../../api";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -12,8 +11,7 @@ class ProfileContainer extends React.Component {
             userId = 2;
         }
 
-        api.getUserDetails(userId)
-            .then(res => this.props.setProfile(res));
+        this.props.initProfile(userId);
     }
 
     render() {
@@ -26,7 +24,7 @@ let mapStateToProps = (state) => ({
 })
 
 let mapDispatchToStore = {
-    setProfile,
+    initProfile,
 }
 
 let ContainerComponentWithRouter = withRouter(ProfileContainer);
