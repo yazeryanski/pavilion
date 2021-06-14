@@ -42,13 +42,14 @@ const api = {
     checkLogin() {
         return instance.get(`auth/me`)
             .then( res => {
-                if (res.data.resultCode === 0) {
-                    return new Promise( (resolve) => {
+                return new Promise( (resolve, reject) => {
+                    if (res.data.resultCode === 0) {
                         resolve(res.data.data);
-                    })
-                } else {
-                    throw new Error(res.data.messages[0])
-                }
+                    } else {
+                        reject( (res.data.messages[0]) );
+                    }
+                })
+                
             })
     }
 }
