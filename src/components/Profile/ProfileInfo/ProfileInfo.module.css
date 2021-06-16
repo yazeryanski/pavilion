@@ -7,8 +7,6 @@
 	position: relative;
 	height: 200px;
 	width: 100%;
-	display: flex;
-	align-items: flex-end;
 }
 
 .userImages-cover {
@@ -33,12 +31,24 @@
 .user-name {
 	padding: 0;
 	margin: 0;
-	position: relative;
+	position: absolute;
 	z-index: 5;
 	color: #fff;
 	font-size: 28px;
 	margin-left: 32%;
 	margin-bottom: 15px;
+	bottom: 0;
+}
+
+.user-status {
+	position: absolute;
+	bottom: -50px;
+	z-index: 5;
+	color: #000;
+	font-size: 18px;
+	margin-left: 32%;
+	margin-bottom: 15px;
+	font-weight: 600;
 }
 
 .userImages-main {

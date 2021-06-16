@@ -2,7 +2,8 @@ import api from "../../api";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const SET_PROFILE = "SET_PROFILE"; 
+const SET_PROFILE = "SET_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 const initialState = {
     profile: null,
@@ -26,6 +27,7 @@ const initialState = {
         },
     ],
     newPostText: "",
+    status: ""
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -44,7 +46,7 @@ const profileReducer = (state = initialState, action) => {
             };
         }
         case UPDATE_NEW_POST_TEXT: {
-            return { ...state, newPostText: action.val};
+            return { ...state, newPostText: action.val };
         }
 
         case SET_PROFILE:
@@ -52,6 +54,13 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             }
+
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+            
         default:
             return state;
     }
@@ -59,15 +68,39 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
+//////////////////////////////////////
+////////// Action Creators////////////
+//////////////////////////////////////
 const setProfile = (profile) => {
-    return {type: SET_PROFILE, profile}
+    return { type: SET_PROFILE, profile }
 }
 
-// Redux Thunk
+const setStatus = (status) => {
+    return { type: SET_STATUS, status}
+}
 
+//////////////////////////////////////
+////////// Thunk Creators////////////
+//////////////////////////////////////
 export const initProfile = (userId) => {
     return (dispatch) => {
         api.getUserDetails(userId)
-        .then( res => dispatch( setProfile(res) ) );
+            .then(res => dispatch(setProfile(res)));
+    }
+}
+
+export const getStatus = (userId) => {
+    return (dispatch) => {
+        api.getStatus(userId)
+            .then(res => {
+                dispatch( setStatus(res.data) );
+            });
+    }
+}
+
+export const updateStatus = (status) => {
+    return dispatch => {
+        api.setStatus(status)
+            .then( res => dispatch( setStatus(status) ) );
     }
 }

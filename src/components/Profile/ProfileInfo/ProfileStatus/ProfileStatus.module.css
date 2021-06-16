@@ -1,0 +1,30 @@
+.status {
+	position: absolute;
+	bottom: -60px;
+	z-index: 5;
+	color: #000;
+	font-size: 18px;
+	margin-left: 32%;
+	margin-bottom: 15px;
+	font-weight: 600;
+}
+
+.status p {
+	margin: 0;
+	padding: 0;
+}
+
+.status p.editable {
+	padding: 5px;
+	border: 2px dashed #ccc;
+}
+
+.status input {
+	padding: 5px 10px;
+	border: 1px solid #3161EA;
+	background-color: rgb(240, 240, 240);
+	border-radius: 25px;
+	outline: none;
+	font-weight: 600;
+	font-size: 16px;
+}

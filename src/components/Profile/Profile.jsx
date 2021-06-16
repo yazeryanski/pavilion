@@ -2,19 +2,27 @@ import Preloader from "../Preloader/Preloader";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-
-export default function Profile(props) {
-    if (!props.profile) {
-        return <Preloader />
-    }
+import React, { Component } from 'react';
 
 
-    return (
-        <div className={s.profile}>
-            <ProfileInfo profile={props.profile}/>
-            <div className={s["profileContent"]}>
-                <MyPostsContainer />
+class Profile extends Component {
+
+    render() {
+
+        if (!this.props.profile) {
+            return <Preloader />
+        }
+
+
+        return (
+            <div className={s.profile}>
+                <ProfileInfo profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
+                <div className={s["profileContent"]}>
+                    <MyPostsContainer />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
+
+export default Profile;
