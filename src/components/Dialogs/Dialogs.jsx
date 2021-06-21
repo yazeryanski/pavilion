@@ -9,8 +9,6 @@ export default function Dialogs(props) {
             <Messages
                 className={s.messages}
                 messages={props.state.messages}
-                newMessageText={props.state.newMessageText}
-                updateText={props.updateText}
                 addMessage={props.addMessage}
             />
         </div>

@@ -15,15 +15,15 @@ const api = {
         return instance.get(`users?count=${count}&page=${page}`)
             .then(res => {
                 return new Promise((resolve) => {
-                        resolve(res.data)
+                    resolve(res.data)
                 })
             });
     },
 
     getUserDetails(userId) {
         return instance.get(`profile/${userId}`)
-            .then( res => {
-                return new Promise (resolve => resolve(res.data));
+            .then(res => {
+                return new Promise(resolve => resolve(res.data));
             })
     },
 
@@ -37,19 +37,19 @@ const api = {
         return instance
             .delete(`follow/${id}`);
     },
-    
+
     // Auth
     checkLogin() {
         return instance.get(`auth/me`)
-            .then( res => {
-                return new Promise( (resolve, reject) => {
+            .then(res => {
+                return new Promise((resolve, reject) => {
                     if (res.data.resultCode === 0) {
                         resolve(res.data.data);
                     } else {
-                        reject( (res.data.messages[0]) );
+                        reject((res.data.messages[0]));
                     }
                 })
-                
+
             })
     },
 
@@ -72,6 +72,40 @@ const api = {
         }).catch(e => {
             console.error(e);
         })
+    },
+
+    login(email, password, rememberMe) {
+        return instance.post('/auth/login', {
+            email,
+            password,
+            rememberMe
+        }).then(res => {
+            return new Promise((resolve, reject) => {
+                if (res.data.resultCode === 0) {
+                    resolve(res.data.data);
+                } else {
+                    reject((res.data.messages[0]));
+                }
+            })
+        }).catch(err => {
+            console.error(err);
+        })
+    },
+
+    logout() {
+        return instance.delete('/auth/login')
+            .then(res => {
+                return new Promise((resolve, reject) => {
+                    if (res.data.resultCode === 0) {
+                        resolve(res.data.data);
+                    } else {
+                        reject((res.data.messages[0]));
+                    }
+                })
+            })
+            .catch(err => {
+                console.error(err);
+            })
     }
 }
 

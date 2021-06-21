@@ -4,9 +4,12 @@ import s from "./Messages.module.css";
 
 export default function DialogItem(props) {
     let messagesRender = props.messages.map(
-        m => <Message text={m.text} date={m.date} who={m.who}
-    />
+        m => <Message text={m.text} date={m.date} who={m.who}/>
     )
+    
+    let newMessageCreate = (val) => {
+        props.addMessage(val.newMessageBody)
+    }
 
     return (
         <div className={s.messages}>
@@ -15,7 +18,7 @@ export default function DialogItem(props) {
             </div>
 
             <div className={s.newMessageSection}>
-                <MessageCreate newMessageText={props.newMessageText} updateText={props.updateText} addMessage={props.addMessage}/>
+                <MessageCreate onSubmit={newMessageCreate}/>
             </div>
         </div>
     );

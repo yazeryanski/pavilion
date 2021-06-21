@@ -18,13 +18,9 @@ let mapDispatchToProps = (dispatch) => {
             });
         },
 
-        addMessage() {
+        addMessage(newMessageBody) {
             dispatch({
-                type: "ADD-MESSAGE",
-            });
-            dispatch({
-                type: "UPDATE-NEW-MESSAGE-TEXT",
-                val: "",
+                type: "ADD-MESSAGE", newMessageBody, 
             });
         },
     };

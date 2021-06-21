@@ -1,39 +1,25 @@
 import s from "./MessageCreate.module.css";
 import React from "react";
+import { Field, reduxForm } from "redux-form";
 
-export default function MessageCreate(props) {
-    let textBox = React.createRef();
 
-    function updateText() {
-        let text = textBox.current.value;
-        props.updateText(text);
-    }
-
-    function addMessage(e) {
-        e.preventDefault();
-        props.addMessage();
-    }
-
-    function enterPressed(e) {  
-        if (e.keyCode === 13) {
-            addMessage(e);
-        }
-    }
+function MessageCreate(props) {
+    const {handleSubmit} = props;
 
 
     return (
-        <div className={s.newMessage}>
-            <textarea
-                ref={textBox}
+        <form className={s.newMessage} onSubmit={handleSubmit}>
+            <Field
+                name="newMessageBody"
                 placeholder="Type text"
                 className={s.textarea}
-                onChange={updateText}
-                value={props.newMessageText}
-                onKeyUp={enterPressed}
-            ></textarea>
-            <a href="#s" className={s.sendMessage} onClick={addMessage}>
+                component="textarea"
+            ></Field>
+            <button className={s.sendMessage}>
                 <i className="fas fa-paper-plane"></i>
-            </a>
-        </div>
+            </button>
+        </form>
     );
 }
+
+export default reduxForm({form: 'newMessage'})(MessageCreate);

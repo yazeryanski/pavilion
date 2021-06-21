@@ -11,14 +11,9 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addNewPost() {
-            dispatch({ type: "ADD-POST" });
-            dispatch({ type: "UPDATE-NEW-POST-TEXT", val: "" });
-        },
-
-        updateTextarea(text) {
-            dispatch({ type: "UPDATE-NEW-POST-TEXT", val: text });
-        },
+        addNewPost(newPostText) {
+            dispatch({ type: "ADD-POST", newPostText });
+        }
     };
 };
 

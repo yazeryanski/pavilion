@@ -13,6 +13,7 @@ export default function Header(props) {
 
                 <nav className={s.login}>
                     {props.isLogined ? props.username: <NavLink to="/login">Login</NavLink>}
+                    {props.isLogined ? <button onClick={props.logout}>Logout</button>: ''}
                 </nav>
             </div>
         </header>

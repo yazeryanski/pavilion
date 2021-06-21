@@ -1,7 +1,6 @@
 import api from "../../api";
 
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_PROFILE = "SET_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
@@ -26,7 +25,6 @@ const initialState = {
             date: "3/23/2021, 11:09:27 PM",
         },
     ],
-    newPostText: "",
     status: ""
 };
 
@@ -39,14 +37,11 @@ const profileReducer = (state = initialState, action) => {
                     ...state.posts,
                     {
                         id: state.posts.length, //AutoIncrement ID
-                        text: state.newPostText,
+                        text: action.newPostText,
                         date: new Date().toLocaleString(),
                     },
                 ],
             };
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return { ...state, newPostText: action.val };
         }
 
         case SET_PROFILE:

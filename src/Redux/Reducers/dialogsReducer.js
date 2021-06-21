@@ -1,5 +1,4 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 const initialState = {
     dialogs: [
@@ -30,8 +29,6 @@ const initialState = {
             who: "me",
         },
     ],
-
-    newMessageText: "",
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -43,17 +40,12 @@ const dialogsReducer = (state = initialState, action) => {
                     ...state.messages,
                     {
                         id: state.messages.length, //AutoIncrement ID
-                        text: state.newMessageText,
+                        text: action.newMessageBody,
                         date: new Date().toLocaleString(),
                         who: "me",
                     },
                 ],
             };
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.val,
-            }
         default:
             return state;
     }

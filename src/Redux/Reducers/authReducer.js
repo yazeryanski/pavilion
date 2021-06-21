@@ -14,8 +14,7 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER: {
             return {
                 ...state,
-                ...action.data,
-                isLogined: true
+                ...action.data
             };
         }
         default:
@@ -25,23 +24,42 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-const setUser = (id, login, email) => {
+const setUser = (id, login, email, isLogined) => {
     let data = {
         id,
         login,
-        email
+        email,
+        isLogined
     }
 
     return {type: SET_USER, data}
 }
-// Redux thunk
 
+// Redux thunk
 export const checkLogin = () => {
     return dispatch => {
         api.checkLogin()
         .then((res) => {
             let {id, login, email} = res;
-            dispatch(setUser(id, login, email));
+            dispatch(setUser(id, login, email, true));
         })
+    }
+}
+
+export const login = (email, password, rememberMe) => {
+    return dispatch => {
+        api.login(email, password, rememberMe)
+            .then(res => {
+                dispatch(checkLogin())
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    }
+}
+
+export const logout = () => {
+    return dispatch => {
+        api.logout().then(dispatch( setUser(null, null, null, false) ));
     }
 }
